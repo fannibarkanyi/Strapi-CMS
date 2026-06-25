@@ -243,6 +243,84 @@
   font-size: 14px;
 }
 
+/* ── Header user indicator ── */
+.header-user {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+  flex-shrink: 0;
+}
+
+/* ── Login page ── */
+.login-page {
+  min-height: calc(100svh - 64px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+}
+
+.login-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 40px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: var(--shadow);
+}
+
+.login-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.login-title {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.4px;
+  margin-bottom: 24px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-h);
+}
+
+.login-error {
+  font-size: 13px;
+  color: #dc2626;
+  margin: 0;
+}
+
+.login-submit {
+  width: 100%;
+  justify-content: center;
+  padding: 11px 18px;
+  font-size: 15px;
+  margin-top: 4px;
+}
+
+.login-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 /* ── Detail view ── */
 .detail-view {
   max-width: 720px;

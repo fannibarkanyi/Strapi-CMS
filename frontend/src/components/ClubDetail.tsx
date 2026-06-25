@@ -94,12 +94,35 @@ export function ClubDetail({ club, onBack }: { club: Club; onBack: () => void })
         </div>
         <div className="meta-chip">
           <span className="meta-label">Time</span>
-          <span className="meta-value meta-tbd">—</span>
+          <span className={`meta-value${club.time ? '' : ' meta-tbd'}`}>
+            {club.time ? club.time.slice(0, 5) : '—'}
+          </span>
         </div>
-        <div className="meta-chip">
-          <span className="meta-label">Location</span>
-          <span className="meta-value meta-tbd">—</span>
-        </div>
+        {club.location ? (
+          <>
+            <div className="meta-chip">
+              <span className="meta-label">Address</span>
+              <span className="meta-value">{club.location.address ?? '—'}</span>
+            </div>
+            {club.location.building && (
+              <div className="meta-chip">
+                <span className="meta-label">Building</span>
+                <span className="meta-value">{club.location.building}</span>
+              </div>
+            )}
+            {club.location.room_number && (
+              <div className="meta-chip">
+                <span className="meta-label">Room</span>
+                <span className="meta-value">{club.location.room_number}</span>
+              </div>
+            )}
+          </>
+        ) : (
+          <div className="meta-chip">
+            <span className="meta-label">Location</span>
+            <span className="meta-value meta-tbd">Not set</span>
+          </div>
+        )}
         {club.owner && (
           <div className="meta-chip">
             <span className="meta-label">Owner</span>

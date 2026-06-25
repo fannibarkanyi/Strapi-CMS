@@ -18,6 +18,16 @@ export interface Block {
   children: BlockChild[];
 }
 
+export interface Location {
+  documentId: string;
+  address: string | null;
+  building: string | null;
+  room_number: string | null;
+  seats: number | null;
+  monitors: number | null;
+  tables: number | null;
+}
+
 export interface Club {
   documentId: string;
   title: string | null;
@@ -26,6 +36,8 @@ export interface Club {
   body: Block[] | null;
   cover_image: { url: string } | null;
   owner: { username: string; email: string } | null;
+  time: string | null;
+  location: Location | null;
 }
 
 export interface Article {
