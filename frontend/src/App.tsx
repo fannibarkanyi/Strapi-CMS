@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Routes, Route, Navigate, NavLink } from 'react-router-dom';
+import { Routes, Route, Navigate, NavLink, useLocation } from 'react-router-dom';
 import './App.css';
 import { LoginPage } from './pages/LoginPage';
 import { ClubsPage } from './pages/ClubsPage';
@@ -12,6 +12,8 @@ const NAV: { label: string; to: string }[] = [
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
+  const location = useLocation();
+  const onLoginPage = location.pathname === '/login';
 
   return (
     <>
@@ -35,9 +37,9 @@ function App() {
         )}
         {loggedIn ? (
           <span className="header-user">Logged in</span>
-        ) : (
+        ) : !onLoginPage ? (
           <NavLink to="/login" className="btn btn-primary">Sign in</NavLink>
-        )}
+        ) : null}
       </header>
 
       <main className="main">
