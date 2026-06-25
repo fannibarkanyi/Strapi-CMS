@@ -100,6 +100,12 @@ export function ClubDetail({ club, onBack }: { club: Club; onBack: () => void })
           <span className="meta-label">Location</span>
           <span className="meta-value meta-tbd">—</span>
         </div>
+        {club.owner && (
+          <div className="meta-chip">
+            <span className="meta-label">Owner</span>
+            <span className="meta-value">{club.owner.username}</span>
+          </div>
+        )}
       </div>
 
       <div className="detail-body">

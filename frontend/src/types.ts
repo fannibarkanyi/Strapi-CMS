@@ -25,6 +25,7 @@ export interface Club {
   publishedAt: string | null;
   body: Block[] | null;
   cover_image: { url: string } | null;
+  owner: { username: string; email: string } | null;
 }
 
 export interface Article {
