@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { strapiClient } from '../tools/strapiClient';
+import type { CurrentUser } from '../types';
+import srhLogo from '../assets/SRH_Bildung.svg.webp';
 
-export function LoginPage({ onLogin }: { onLogin: () => void }) {
+export function LoginPage({ onLogin }: { onLogin: (user: CurrentUser) => void }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -15,8 +17,9 @@ export function LoginPage({ onLogin }: { onLogin: () => void }) {
     setLoading(true);
     try {
       await strapiClient.login(email, password);
-      onLogin();
-      navigate('/clubs', { replace: true });
+      const user = await strapiClient.me();
+      onLogin(user);
+      navigate('/', { replace: true });
     } catch {
       setError('Invalid email or password.');
     } finally {
@@ -28,7 +31,7 @@ export function LoginPage({ onLogin }: { onLogin: () => void }) {
     <div className="login-page">
       <div className="login-card">
         <div className="login-logo">
-          <div className="header-logo-mark" />
+          <img src={srhLogo} alt="SRH" className="header-logo-mark" />
           <span className="header-title">SRH Ambassadors</span>
         </div>
         <h1 className="login-title">Sign in</h1>

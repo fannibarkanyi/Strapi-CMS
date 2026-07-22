@@ -1,0 +1,82 @@
+{
+  "kind": "collectionType",
+  "collectionName": "events",
+  "info": {
+    "singularName": "event",
+    "pluralName": "events",
+    "displayName": "Event"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "cover_image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "body": {
+      "type": "blocks"
+    },
+    "location": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::location.location"
+    },
+    "schedule": {
+      "type": "component",
+      "component": "shared.event-time",
+      "repeatable": false
+    },
+    "capacity": {
+      "type": "integer",
+      "min": 0
+    },
+    "registered_count": {
+      "type": "integer",
+      "default": 0,
+      "min": 0
+    },
+    "is_public": {
+      "type": "boolean",
+      "required": true,
+      "default": true
+    },
+    "tags": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::tag.tag",
+      "inversedBy": "events"
+    },
+    "event_managers": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "plugin::users-permissions.user"
+    },
+    "review_status": {
+      "type": "enumeration",
+      "required": true,
+      "default": "Approved",
+      "enum": [
+        "Sent",
+        "Approved",
+        "Declined"
+      ]
+    },
+    "submitted_by": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user"
+    }
+  }
+}

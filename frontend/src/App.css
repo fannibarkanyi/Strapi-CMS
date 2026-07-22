@@ -22,10 +22,9 @@
 }
 
 .header-logo-mark {
-  width: 28px;
-  height: 28px;
-  background: var(--orange);
-  border-radius: 6px;
+  height: 26px;
+  width: auto;
+  display: block;
 }
 
 .header-title {
@@ -35,12 +34,26 @@
   letter-spacing: -0.3px;
 }
 
+/* ── Right-side group (nav + divider + profile/auth) ── */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-left: auto;
+}
+
 /* ── Nav ── */
 .header-nav {
   display: flex;
   align-items: center;
   gap: 4px;
-  flex: 1;
+}
+
+.header-divider {
+  width: 1px;
+  height: 24px;
+  background: var(--border);
+  flex-shrink: 0;
 }
 
 .nav-item {
@@ -51,6 +64,7 @@
   font-size: 14px;
   font-weight: 500;
   color: var(--text);
+  text-decoration: none;
   cursor: pointer;
   transition: background 0.15s, color 0.15s;
 }
@@ -79,6 +93,7 @@
   border-radius: 8px;
   font-size: 14px;
   font-weight: 500;
+  text-decoration: none;
   cursor: pointer;
   transition: all 0.15s ease;
   border: 1px solid transparent;
@@ -121,6 +136,13 @@
   margin-bottom: 32px;
 }
 
+.page-heading-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
 .page-heading h1 {
   font-size: 28px;
   letter-spacing: -0.5px;
@@ -150,6 +172,21 @@
   flex-direction: column;
   gap: 10px;
   position: relative;
+}
+
+.card-image {
+  margin: -24px -24px 0;
+  height: 150px;
+  overflow: hidden;
+  border-radius: 12px 12px 0 0;
+  flex-shrink: 0;
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .card-clickable {
@@ -243,12 +280,27 @@
   font-size: 14px;
 }
 
-/* ── Header user indicator ── */
-.header-user {
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--text);
+/* ── Profile button ── */
+.profile-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--orange-light);
+  border: 1px solid var(--orange-border);
+  color: var(--orange);
   flex-shrink: 0;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.profile-btn:hover {
+  background: var(--orange-border);
+}
+
+.profile-btn svg {
+  stroke: currentColor;
 }
 
 /* ── Login page ── */

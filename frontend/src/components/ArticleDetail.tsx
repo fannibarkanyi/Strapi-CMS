@@ -1,5 +1,8 @@
 import { useState } from 'react';
 import type { Article, Comment } from '../types';
+import { BlocksRenderer } from './BlocksRenderer';
+
+const BASE_URL = (import.meta.env.VITE_STRAPI_BASE_URL as string) || 'http://localhost:3001';
 
 function formatDate(dateStr: string | null) {
   if (!dateStr) return '—';
@@ -40,8 +43,14 @@ export function ArticleDetail({ article, onBack }: { article: Article; onBack: (
     <div className="detail-view">
       <button className="detail-back" onClick={onBack}>← Back</button>
 
+      {article.cover && (
+        <div className="detail-cover">
+          <img src={`${BASE_URL}${article.cover.url}`} alt={article.title ?? ''} />
+        </div>
+      )}
+
       <div className="detail-header">
-        <span className="card-badge">{article.category?.name ?? 'Article'}</span>
+        <span className="card-badge">Article</span>
         <h1>{article.title ?? 'Untitled'}</h1>
       </div>
 
@@ -49,7 +58,7 @@ export function ArticleDetail({ article, onBack }: { article: Article; onBack: (
         {article.author && (
           <div className="meta-chip">
             <span className="meta-label">Author</span>
-            <span className="meta-value">{article.author.name}</span>
+            <span className="meta-value">{article.author.username}</span>
           </div>
         )}
         <div className="meta-chip">
@@ -58,12 +67,20 @@ export function ArticleDetail({ article, onBack }: { article: Article; onBack: (
         </div>
       </div>
 
+      {article.tags && article.tags.length > 0 && (
+        <div className="detail-meta">
+          {article.tags.map(tag => (
+            <span className="card-badge" key={tag.documentId}>{tag.name}</span>
+          ))}
+        </div>
+      )}
+
       {article.description && (
         <p className="detail-description">{article.description}</p>
       )}
 
       <div className="detail-body">
-        <p className="no-content">Full article body coming soon.</p>
+        <BlocksRenderer blocks={article.body} />
       </div>
 
       <div className="comments-section">

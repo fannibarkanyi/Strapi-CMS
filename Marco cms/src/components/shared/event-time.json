@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_shared_event_times",
+  "info": {
+    "displayName": "Event Time",
+    "icon": "clock",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "start_datetime": {
+      "type": "datetime",
+      "required": true
+    },
+    "end_datetime": {
+      "type": "datetime"
+    },
+    "timezone": {
+      "type": "string"
+    }
+  }
+}
