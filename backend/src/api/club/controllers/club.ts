@@ -1,12 +1,3 @@
-/**
- * club controller
- *
- * Clubs go through a submission/review workflow: students submit new clubs
- * which stay unpublished with review_status "Sent" until an Ambassador
- * approves (publishes) or declines them. Students may only ever see their
- * own pending/declined drafts, never another student's.
- */
-
 import { factories } from '@strapi/strapi';
 
 const UID = 'api::club.club';
@@ -15,12 +6,6 @@ export default factories.createCoreController(UID, ({ strapi }) => ({
     async find(ctx) {
         const isAmbassador = ctx.state.user?.role?.type === 'ambassador';
 
-        // Non-ambassadors listing drafts only ever get their own - but a
-        // relation filter/populate targeting plugin::users-permissions.user
-        // would fail content-API validation (needs "User: find", which we
-        // don't grant). So we let the query through unfiltered/unpopulated on
-        // that field, then narrow the results with a trusted, unrestricted
-        // documents() lookup per item instead.
         const wantsOwnDrafts = ctx.query.status === 'draft' && ctx.state.user && !isAmbassador;
         if (wantsOwnDrafts) {
             const populate = { ...(ctx.query.populate as Record<string, unknown> | undefined) };
@@ -70,10 +55,6 @@ export default factories.createCoreController(UID, ({ strapi }) => ({
         const isAmbassador = ctx.state.user.role?.type === 'ambassador';
         const data = ctx.request.body.data ?? {};
 
-        // Writing a relation to plugin::users-permissions.user via the content
-        // API requires "find" permission on User, which we don't grant (it
-        // would also expose /api/users). So we strip it here and set it right
-        // after creation via a trusted, unrestricted documents() call instead.
         const requestedOwner = data.owner;
         delete data.owner;
 
